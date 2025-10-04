@@ -7,6 +7,7 @@ def home(request):
     return render(request, 'index.html', {'animais': animais})
 
 def cadastro_animal(request):
+    #cadastrando animal
     if request.method == 'POST':
         form = AnimalForm(request.POST)
         if form.is_valid():
