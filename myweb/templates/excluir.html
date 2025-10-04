@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Excluir Animal</title>
+</head>
+<body>
+    <h1>Tem certeza que deseja excluir "{{ animal.nome }}"?</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Sim, excluir</button>
+        <a href="{% url 'home' %}">Cancelar</a>
+    </form>
+</body>
+</html>

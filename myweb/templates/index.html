@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Animais</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+        }
+        ul {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            list-style-type: none;
+            max-width: 400px;
+        }
+        li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ccc;
+        }
+        a.button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a.button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>🐾 Lista de Animais</h1>
+    
+    {% if animais %}
+        <ul>
+            {% for animal in animais %}
+                <li>
+                    <a href="{% url 'detalhes' animal.id %}">{{ animal.nome }}</a>
+            — <a href="{% url 'editar' animal.id %}">Editar</a>
+            | <a href="{% url 'excluir' animal.id %}">Excluir</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Nenhum animal cadastrado.</p>
+    {% endif %}
+
+    <a href="{% url 'cadastro' %}">➕ Adicionar Animal</a>
+
+    <script>
+        // Simulação de dados armazenados no localStorage
+        const lista = JSON.parse(localStorage.getItem('animais')) || [];
+
+        const ul = document.getElementById('lista-animais');
+        if (lista.length === 0) {
+            ul.innerHTML = "<li>Nenhum animal cadastrado.</li>";
+        } else {
+            lista.forEach(animal => {
+                const li = document.createElement('li');
+                li.textContent = animal;
+                ul.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
